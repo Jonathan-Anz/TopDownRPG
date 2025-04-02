@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 437836499}
   - component: {fileID: 437836498}
   - component: {fileID: 437836497}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wall_0 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,7 +607,7 @@ GameObject:
   - component: {fileID: 941411404}
   - component: {fileID: 941411403}
   - component: {fileID: 941411402}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: wall_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -737,7 +737,7 @@ GameObject:
   - component: {fileID: 1205825932}
   - component: {fileID: 1205825931}
   - component: {fileID: 1205825933}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TEST_NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -868,7 +868,7 @@ GameObject:
   - component: {fileID: 1495410964}
   - component: {fileID: 1495410967}
   - component: {fileID: 1495410966}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: player_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
