@@ -10,7 +10,7 @@ public class CharacterMenu : MonoBehaviour
     public TextMeshProUGUI healthText, levelText, coinText, xpText;
 
     // Logic
-    public Image weaponSprite;
+    public Sprite[] weaponSprites = new Sprite[4];
     public RectTransform xpBar;
 
     // Update character information

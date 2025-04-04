@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class Weapon : Collidable
 {
-    // Damage struct
-    public int damagePoint = 1;
-    public float pushForce = 2f;
-
-    // Upgrade
-    public int weaponLevel = 0;
+    // Weapon data
     private SpriteRenderer spriteRenderer;
+    public int damage = 0;
+    public float pushForce = 0f;
+    private float cooldown = 0f;
 
     // Swing
     private Animator anim;
-    private float cooldown = 0.5f;
     private float lastSwing;
 
     protected override void Start()
@@ -38,6 +35,14 @@ public class Weapon : Collidable
         }        
     }
 
+    public void SetCurrentWeapon(WeaponData data)
+    {
+        spriteRenderer.sprite = data.weaponSprite;
+        damage = data.weaponDamage;
+        pushForce = data.weaponPushForce;
+        cooldown = data.weaponCooldown;
+    }
+
     protected override void OnCollide(Collider2D col)
     {
         if (col.tag != "Fighter") return;
@@ -47,7 +52,7 @@ public class Weapon : Collidable
         //Debug.Log(col.name);
 
         // Create new damage object then send it to the fighter that was hit
-        Damage dmg = new Damage(transform.position, damagePoint, pushForce);
+        Damage dmg = new Damage(transform.position, damage, pushForce);
 
         col.SendMessage("ReceiveDamage", dmg);
     }

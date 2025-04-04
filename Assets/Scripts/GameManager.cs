@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     // References
     public Player player;
+    public Weapon[] weapons = new Weapon[4];
+    public WeaponData defaultWeapon; // Set in inspector
     public FloatingTextManager floatingTextManager;
     
     // Logic
@@ -34,11 +36,20 @@ public class GameManager : MonoBehaviour
     public int experience;
 
 
+    private void Start()
+    {
+        // Start player off with a normal sword
+
+    }
+
+
     // Floating text
     public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
     {
         floatingTextManager.Show(msg, fontSize, color, position, motion, duration);
     }
+
+
 
     // Save state
     public void SaveState()
