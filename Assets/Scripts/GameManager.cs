@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     public FloatingTextManager floatingTextManager;
     
     // Logic
-    public int pesos;
+    public int coins;
     public int experience;
 
 
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         string s = "";
 
         s += "0" + "|"; // TEMP
-        s += pesos.ToString() + "|";
+        s += coins.ToString() + "|";
         s += experience.ToString() + "|";
         s += "0"; // TEMP
 
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log($"[{data[0]}, {data[1]}, {data[2]}, {data[3]}]");
 
         // TODO: change player skin
-        pesos = int.Parse(data[1]);
+        coins = int.Parse(data[1]);
         experience = int.Parse(data[2]);
         // TODO: change the weapon level
 
