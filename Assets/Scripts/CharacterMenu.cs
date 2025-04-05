@@ -12,6 +12,7 @@ public class CharacterMenu : MonoBehaviour
 
     // Logic
     public Image[] weaponSprites = new Image[4];
+    public Image[] keySprites = new Image[2];
 
 
     // Update character information

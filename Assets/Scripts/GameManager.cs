@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public WeaponData defaultWeapon; // Set in inspector
     public List<WeaponData> inventoryWeapons = new List<WeaponData>();
     public int[] potions = { 0, 0, 0, 0 };
+    public bool hasGoldKey = false;
+    public bool hasSilverKey = false;
 
     // References
     public Player player;
@@ -137,6 +139,17 @@ public class GameManager : MonoBehaviour
                     1.5f );
 
         menu.UpdateMenu();
+    }
+
+    // Keys
+    public bool HasCorrectKey(KeyType key)
+    {
+        switch (key)
+        {
+            case KeyType.Gold: return hasGoldKey;
+            case KeyType.Silver: return hasSilverKey;
+            default: return false;
+        }
     }
 
     // Save state
