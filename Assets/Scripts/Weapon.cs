@@ -7,6 +7,7 @@ public class Weapon : Collidable
     // Weapon data
     private SpriteRenderer spriteRenderer;
     public int damage = 0;
+    public float staminaAmount;
     public float pushForce = 0f;
     private float cooldown = 0f;
 
@@ -27,20 +28,23 @@ public class Weapon : Collidable
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (Time.time - lastSwing > cooldown)
+            if (Time.time - lastSwing > cooldown &&
+                GameManager.instance.player.stamina >= staminaAmount)
             {
                 lastSwing = Time.time;
+                GameManager.instance.player.stamina -= staminaAmount;
                 Swing();
             }
         }        
     }
 
-    public void SetCurrentWeapon(WeaponData data)
+    public void SetCurrentWeapon(WeaponData weapon)
     {
-        spriteRenderer.sprite = data.weaponSprite;
-        damage = data.weaponDamage;
-        pushForce = data.weaponPushForce;
-        cooldown = data.weaponCooldown;
+        spriteRenderer.sprite = weapon.weaponSprite;
+        damage = weapon.weaponDamage;
+        staminaAmount = weapon.staminaAmount;
+        pushForce = weapon.weaponPushForce;
+        cooldown = weapon.weaponCooldown;
     }
 
     protected override void OnCollide(Collider2D col)
@@ -52,7 +56,7 @@ public class Weapon : Collidable
         //Debug.Log(col.name);
 
         // Create new damage object then send it to the fighter that was hit
-        Damage dmg = new Damage(transform.position, damage, pushForce);
+        Damage dmg = new Damage(transform.position, damage + GameManager.instance.player.strength, pushForce);
 
         col.SendMessage("ReceiveDamage", dmg);
     }

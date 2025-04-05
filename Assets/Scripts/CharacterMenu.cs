@@ -1,31 +1,63 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterMenu : MonoBehaviour
 {
     // Text fields
-    public TextMeshProUGUI healthText, levelText, coinText, xpText;
+    public TextMeshProUGUI[] potionNumTexts = new TextMeshProUGUI[4];
 
     // Logic
-    public Sprite[] weaponSprites = new Sprite[4];
-    public RectTransform xpBar;
+    public Image[] weaponSprites = new Image[4];
+
 
     // Update character information
     public void UpdateMenu()
     {
-        // Weapon
+        // Keys
 
-        // Meta
-        levelText.text = "NOT IMPLEMENTED";
-        healthText.text = GameManager.instance.player.hitPoint.ToString();
-        coinText.text = GameManager.instance.coins.ToString();
+        // Potions
+        for (int i = 0; i < potionNumTexts.Length; i++)
+        {
+            potionNumTexts[i].text = GameManager.instance.potions[i].ToString();
+        }
+    }
 
-        // XP bar
-        xpText.text = "NOT IMPLEMENTED";
-        xpBar.localScale = new Vector3(0.5f, 1f, 1f);
+    public void AddWeaponToMenu(int index, WeaponData data)
+    {
+        weaponSprites[index].sprite = data.weaponSprite;
+        weaponSprites[index].enabled = true;
+        //Debug.Log($"Added {data.name} to weapon slot {index + 1}");
+    }
+
+    public void SelectWeapon(int index)
+    {
+        //Debug.Log($"Weapon {index + 1} was selected");
+        //Debug.Log($"Inventory weapons length is {GameManager.instance.inventoryWeapons.Count}");
+
+        if (index > GameManager.instance.inventoryWeapons.Count - 1)
+        {
+            //Debug.Log($"Weapon slot locked!");
+            return;
+        }
+
+        GameManager.instance.player.currentWeapon.SetCurrentWeapon(GameManager.instance.inventoryWeapons[index]);
+
+        GameManager.instance.ShowText(  $"{GameManager.instance.inventoryWeapons[index].weaponName} selected",
+                                        20,
+                                        Color.cyan,
+                                        Camera.main.ScreenToWorldPoint(new Vector3(400, 100, 0)),
+                                        Vector3.zero,
+                                        1f );
+    }
+
+    public void SelectPotion(int type)
+    {
+        //Debug.Log($"Selected {(PotionType)type} potion");
+        GameManager.instance.UsePotion((PotionType)type);
     }
 
 }

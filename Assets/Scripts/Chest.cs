@@ -1,11 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum LootType
+{
+    Weapon, Potion
+}
+public enum PotionType
+{
+    Health, Stamina, Speed, Strength
+}
+
 public class Chest : Collectible
 {
     public Sprite emptyChest;
-    public int coinAmount = 5;
+    public LootType lootType;
+    public WeaponData weapon;
+    public PotionType potionType;
+    //public int coinAmount;
 
     protected override void OnCollect()
     {
@@ -13,9 +26,25 @@ public class Chest : Collectible
         {
             collected = true;
             GetComponent<SpriteRenderer>().sprite = emptyChest;
-            GameManager.instance.coins += coinAmount;
-            //Debug.Log($"Grant {coinAmount} coins!");
-            GameManager.instance.ShowText(  $"+{coinAmount} coins!",
+
+            string message = "";
+            // if (lootType == LootType.Coins)
+            // {
+            //     GameManager.instance.coins += coinAmount;
+            //     message = $"+{coinAmount} coins!";
+            // }
+            if (lootType == LootType.Weapon)
+            {
+                GameManager.instance.AddWeapon(weapon);
+                message = $"Found {weapon.weaponName}!";
+            }
+            else if (lootType == LootType.Potion)
+            {
+                GameManager.instance.potions[(int)potionType] += 1;
+                message = $"Found {potionType} potion!";
+            }
+            
+            GameManager.instance.ShowText(  message,
                                             25,
                                             Color.yellow,
                                             transform.position,
@@ -23,4 +52,5 @@ public class Chest : Collectible
                                             1.5f );
         }
     }
+    
 }

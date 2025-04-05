@@ -6,9 +6,27 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    // Resources
+    public WeaponData defaultWeapon; // Set in inspector
+    public List<WeaponData> inventoryWeapons = new List<WeaponData>();
+    public int[] potions = { 0, 0, 0, 0 };
+
+    // References
+    public Player player;
+    public Weapon currentWeapon;
+    public FloatingTextManager floatingTextManager;
+    public CharacterMenu menu;
+    public HUD hud;
+    
+    // Logic
+    //public int coins;
+    //public int experience;
+
+
     private void Awake()
     {
-        if (GameManager.instance != null)
+        if (instance != null)
         {
             Destroy(gameObject);
             return;
@@ -19,29 +37,22 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Resources
-    public List<Sprite> playerSprites;
-    public List<Sprite> weaponSprites;
-    public List<int> weaponPrices;
-    public List<int> xpTable;
-
-    // References
-    public Player player;
-    public Weapon[] weapons = new Weapon[4];
-    public WeaponData defaultWeapon; // Set in inspector
-    public FloatingTextManager floatingTextManager;
-    
-    // Logic
-    public int coins;
-    public int experience;
-
-
     private void Start()
     {
         // Start player off with a normal sword
-
+        AddWeapon(defaultWeapon);
+        player.currentWeapon.SetCurrentWeapon(defaultWeapon);
     }
 
+    void Update()
+    {
+        // Regain stamina
+        if (player.stamina < player.maxStamina) player.stamina += player.staminaRechargeRate * Time.deltaTime;
+
+        // Update health bars
+        hud.SetHealthBar((float)player.health / player.maxHealth);
+        hud.SetStaminaBar(player.stamina / player.maxStamina);
+    }
 
     // Floating text
     public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
@@ -50,30 +61,107 @@ public class GameManager : MonoBehaviour
     }
 
 
+    // Weapons
+    public void AddWeapon(WeaponData weapon)
+    {
+        // Only max of 4 weapons
+        if (inventoryWeapons.Count >= 4) return;
+
+        // Add weapon
+        inventoryWeapons.Add(weapon);
+
+        // Add weapon to menu display
+        menu.AddWeaponToMenu(inventoryWeapons.Count - 1, weapon);
+
+        //Debug.Log($"Added {weapon.name} to inventory weapons");
+    }
+
+    // Potions
+    public void UsePotion(PotionType type)
+    {
+        if (potions[(int)type] <= 0) return;
+
+        string message = "";
+        Color color = Color.clear;
+        switch(type)
+        {
+            case PotionType.Health:
+                if (player.health == player.maxHealth)
+                {
+                    message = "Health already full";
+                }
+                else
+                {
+                    player.health = player.maxHealth;
+                    message = "Health now full";
+                    potions[(int)type] -= 1;
+                }
+                color = Color.red;
+                break;
+
+            case PotionType.Stamina:
+                if (player.stamina >= player.maxStamina - 0.01f)
+                {
+                    message = "Stamina already full";
+                }
+                else
+                {
+                    player.stamina = player.maxStamina;
+                    message = "Stamina now full";
+                    potions[(int)type] -= 1;
+                }
+                color = Color.green;
+                break;
+
+            case PotionType.Speed:
+                player.xSpeed += 0.25f;
+                player.ySpeed += 0.25f;
+                message = $"Movement speed increased permanently";
+                color = Color.blue;
+                potions[(int)type] -= 1;
+                break;
+
+            case PotionType.Strength:
+                player.strength += 1;
+                message = $"Strength increased permanently";
+                color = Color.yellow;
+                potions[(int)type] -= 1;
+                break;
+        }
+
+        ShowText(   message,
+                    20,
+                    color,
+                    Camera.main.ScreenToWorldPoint(new Vector3(400, 100, 0)),
+                    Vector3.zero,
+                    1.5f );
+
+        menu.UpdateMenu();
+    }
 
     // Save state
     public void SaveState()
     {
-        string s = "";
+        //string s = "";
 
-        s += "0" + "|"; // TEMP
-        s += coins.ToString() + "|";
-        s += experience.ToString() + "|";
-        s += "0"; // TEMP
+        //s += "0" + "|"; // TEMP
+        //s += coins.ToString() + "|";
+        //s += experience.ToString() + "|";
+        //s += "0"; // TEMP
 
-        PlayerPrefs.SetString("SaveState", s);
+        //PlayerPrefs.SetString("SaveState", s);
         //Debug.Log("SaveState");
     }
     public void LoadState(Scene s, LoadSceneMode mode)
     {
-        if (!PlayerPrefs.HasKey("SaveState")) return;
+        //if (!PlayerPrefs.HasKey("SaveState")) return;
 
-        string[] data = PlayerPrefs.GetString("SaveState").Split("|");
+        //string[] data = PlayerPrefs.GetString("SaveState").Split("|");
         //Debug.Log($"[{data[0]}, {data[1]}, {data[2]}, {data[3]}]");
 
         // TODO: change player skin
-        coins = int.Parse(data[1]);
-        experience = int.Parse(data[2]);
+        //coins = int.Parse(data[1]);
+        //experience = int.Parse(data[2]);
         // TODO: change the weapon level
 
         //Debug.Log("LoadState");

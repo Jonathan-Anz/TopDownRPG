@@ -15,5 +15,6 @@ MonoBehaviour:
   weaponName: Broad Sword
   weaponSprite: {fileID: 683909679, guid: 21854da3cca376b41b5cad27bffd4b00, type: 3}
   weaponDamage: 5
-  weaponCooldown: 0.75
+  staminaAmount: 3
   weaponPushForce: 5
+  weaponCooldown: 0.75

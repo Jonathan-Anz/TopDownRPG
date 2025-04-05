@@ -15,5 +15,6 @@ MonoBehaviour:
   weaponName: Normal Sword
   weaponSprite: {fileID: -1060457616, guid: 21854da3cca376b41b5cad27bffd4b00, type: 3}
   weaponDamage: 4
-  weaponCooldown: 0.5
+  staminaAmount: 2
   weaponPushForce: 4
+  weaponCooldown: 0.5

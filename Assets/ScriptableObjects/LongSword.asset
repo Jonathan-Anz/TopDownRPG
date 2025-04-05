@@ -15,5 +15,6 @@ MonoBehaviour:
   weaponName: Long Sword
   weaponSprite: {fileID: 162674694, guid: 21854da3cca376b41b5cad27bffd4b00, type: 3}
   weaponDamage: 3
-  weaponCooldown: 0.35
+  staminaAmount: 1.5
   weaponPushForce: 3
+  weaponCooldown: 0.35

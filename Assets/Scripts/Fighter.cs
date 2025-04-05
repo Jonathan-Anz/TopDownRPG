@@ -5,8 +5,10 @@ using UnityEngine;
 public class Fighter : MonoBehaviour
 {
     // Public fields
-    public int hitPoint = 10;
-    public int maxHitpoint = 10;
+    public int health = 10;
+    public int maxHealth = 10;
+    public float stamina = 10;
+    public float maxStamina = 10;
     public float pushRecoverySpeed = 0.2f;
 
     // Immunity
@@ -19,24 +21,23 @@ public class Fighter : MonoBehaviour
     // All fighters can ReceiveDamage / Die
     protected virtual void ReceiveDamage(Damage dmg)
     {
-        if (Time.time - lastImmune > immuneTime)
+        if (Time.time - lastImmune <= immuneTime) return;
+
+        lastImmune = Time.time;
+        health -= dmg.damageAmount;
+        pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
+
+        GameManager.instance.ShowText(  dmg.damageAmount.ToString(),
+                                        15,
+                                        Color.red,
+                                        transform.position,
+                                        Vector3.zero,
+                                        0.5f);
+
+        if (health <= 0)
         {
-            lastImmune = Time.time;
-            hitPoint -= dmg.damageAmount;
-            pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
-
-            GameManager.instance.ShowText(  dmg.damageAmount.ToString(),
-                                            15,
-                                            Color.red,
-                                            transform.position,
-                                            Vector3.zero,
-                                            0.5f);
-
-            if (hitPoint <= 0)
-            {
-                hitPoint = 0;
-                Death();
-            }
+            health = 0;
+            Death();
         }
     }
     protected virtual void Death()

@@ -15,5 +15,6 @@ MonoBehaviour:
   weaponName: Golden Sword
   weaponSprite: {fileID: 1967490373, guid: 21854da3cca376b41b5cad27bffd4b00, type: 3}
   weaponDamage: 5
-  weaponCooldown: 0.5
+  staminaAmount: 2.5
   weaponPushForce: 4
+  weaponCooldown: 0.5

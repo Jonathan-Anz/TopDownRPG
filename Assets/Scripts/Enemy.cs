@@ -8,6 +8,8 @@ public class Enemy : Mover
     public int xpValue = 1;
 
     // Logic
+    public float xSpeed = 1f;
+    public float ySpeed = 0.75f;
     public float triggerLength = 1f;
     public float chaseLength = 5f;
     private bool chasing;
@@ -42,17 +44,17 @@ public class Enemy : Mover
             {
                 if (!collidingWithPlayer)
                 {
-                    UpdateMotor((playerTransform.position - transform.position).normalized);
+                    UpdateMotor((playerTransform.position - transform.position).normalized, xSpeed, ySpeed);
                 }
             }
             else
             {
-                UpdateMotor(startingPosition - transform.position);
+                UpdateMotor(startingPosition - transform.position, xSpeed, ySpeed);
             }
         }
         else
         {
-            UpdateMotor(startingPosition - transform.position);
+            UpdateMotor(startingPosition - transform.position, xSpeed, ySpeed);
             chasing = false;
         }
 
@@ -77,13 +79,13 @@ public class Enemy : Mover
     protected override void Death()
     {
         Destroy(gameObject);
-        GameManager.instance.experience += xpValue;
-        GameManager.instance.ShowText(  $"+{xpValue} xp",
-                                        30,
-                                        Color.magenta,
-                                        transform.position,
-                                        Vector3.up * 30f,
-                                        1f);
+        // GameManager.instance.experience += xpValue;
+        // GameManager.instance.ShowText(  $"+{xpValue} xp",
+        //                                 30,
+        //                                 Color.magenta,
+        //                                 transform.position,
+        //                                 Vector3.up * 30f,
+        //                                 1f);
     }
 
 }
