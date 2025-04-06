@@ -17,4 +17,9 @@ public class Player : Mover
 
         UpdateMotor(new Vector3(x, y, 0f).normalized, xSpeed, ySpeed);
     }
+
+    protected override void Death()
+    {
+        GameManager.instance.ResetGame();
+    }
 }

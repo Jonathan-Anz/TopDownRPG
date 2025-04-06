@@ -79,6 +79,11 @@ public class Enemy : Mover
     protected override void Death()
     {
         Destroy(gameObject);
+        if (gameObject.name == "Boss")
+        {
+            //Debug.Log("Boss defeated");
+            GameManager.instance.defeatedBoss = true;
+        }
         // GameManager.instance.experience += xpValue;
         // GameManager.instance.ShowText(  $"+{xpValue} xp",
         //                                 30,

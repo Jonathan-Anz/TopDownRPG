@@ -1692,6 +1692,90 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: enemy_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a5b11bf0e255b9489c9d67a04da6334
+      internalID: -961400880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_2
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8fe34af269532148bdf9ad7b6fccfb1
+      internalID: -1327331078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4096d470bf4fcf94cad784d73f118907
+      internalID: -1726216816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 48
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c21dd0ddb32ee745b140e28bb54a791
+      internalID: 104342273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1704,6 +1788,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Atlas_1: 1251425207
+      boss: 104342273
       chest_0: -793551028
       chest_1: -1479137751
       crate_0: 2110211122
@@ -1721,6 +1806,9 @@ TextureImporter:
       door_open_2: 348589146
       door_open_3: -1135970837
       enemy_0: -264328465
+      enemy_1: -961400880
+      enemy_2: -1327331078
+      enemy_3: -1726216816
       floor_0: 255110254
       floor_1: 1699378240
       floor_10: 1030167319

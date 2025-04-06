@@ -36,8 +36,9 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
-        SceneManager.sceneLoaded += LoadState;
-        DontDestroyOnLoad(gameObject);
+        Time.timeScale = 0f;
+        //SceneManager.sceneLoaded += LoadState;
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -152,6 +153,20 @@ public class GameManager : MonoBehaviour
             case KeyType.Enemy: return defeatedBoss;
             default: return false;
         }
+    }
+
+    // Menu
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+    }
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // Save state

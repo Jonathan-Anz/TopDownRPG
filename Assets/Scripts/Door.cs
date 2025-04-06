@@ -13,7 +13,21 @@ public class Door : MonoBehaviour
         if (collision.name == "Player")
         {
             //Debug.Log("Collided with player!");
-            if (GameManager.instance.HasCorrectKey(requiredKey)) Open();
+            if (GameManager.instance.HasCorrectKey(requiredKey))
+            {
+                Open();
+
+                if (gameObject.name == "ExitDoor")
+                {
+                    GameManager.instance.ShowText(  "You win!",
+                                                    25,
+                                                    Color.white,
+                                                    transform.position,
+                                                    Vector3.zero,
+                                                    1.5f );
+                    GameManager.instance.ResetGame();
+                }
+            }
             else
             {
                 Color color = Color.clear;
