@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum LootType { Weapon, Potion, Key }
 public enum PotionType { Health, Stamina, Speed, Strength }
-public enum KeyType { Gold, Silver }
+public enum KeyType { Enemy, Gold, Silver }
 
 public class Chest : Collectible
 {

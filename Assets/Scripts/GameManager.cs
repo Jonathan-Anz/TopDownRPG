@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int[] potions = { 0, 0, 0, 0 };
     public bool hasGoldKey = false;
     public bool hasSilverKey = false;
+    public bool defeatedBoss = false;
 
     // References
     public Player player;
@@ -148,6 +149,7 @@ public class GameManager : MonoBehaviour
         {
             case KeyType.Gold: return hasGoldKey;
             case KeyType.Silver: return hasSilverKey;
+            case KeyType.Enemy: return defeatedBoss;
             default: return false;
         }
     }

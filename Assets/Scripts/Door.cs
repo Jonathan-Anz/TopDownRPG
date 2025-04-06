@@ -17,9 +17,23 @@ public class Door : MonoBehaviour
             else
             {
                 Color color = Color.clear;
-                if (requiredKey == KeyType.Gold) color = Colors.gold;
-                else if (requiredKey == KeyType.Silver) color = Colors.silver;
-                GameManager.instance.ShowText(  $"Requires {requiredKey} key!",
+                string message = "";
+                if (requiredKey == KeyType.Gold)
+                {
+                    message = $"Requires {requiredKey} key!";
+                    color = Colors.gold;
+                }
+                else if (requiredKey == KeyType.Silver)
+                {
+                    message = $"Requires {requiredKey} key!";
+                    color = Colors.silver;
+                }
+                else if (requiredKey == KeyType.Enemy)
+                {
+                    message = $"Defeat final boss to unlock!";
+                    color = Color.white;
+                }
+                GameManager.instance.ShowText(  message,
                                                 25,
                                                 color,
                                                 transform.position,
